@@ -48,6 +48,20 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaihoaSoanntengTuichiautian.
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
 
+with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaijitToaSutian.csv")) as csvfile:
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    header = reader.__next__()
+    header = { v: k for (k, v) in enumerate(header) }
+    for row in reader:
+        for c in (
+            row[header['HanLoTaibunPoj']]
+            + row[header['KaisoehHanLoPoj']]
+            + row[header['LekuHanLoPoj']]
+            + row[header['GoanchhehPoochhiongChuliau']]
+        ):
+            if unicodedata.category(c) == 'Lo':
+                WORDSET.add(c)
+
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
     header = reader.__next__()
