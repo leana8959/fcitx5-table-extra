@@ -1,3 +1,22 @@
+This repo is a fork, aiming to add CJK characters used in Taiwanese to the cangjie3 table.
+
+# Problem
+Directly using the cangjie3 or cangjie5 table would not allow user to type some Taiwanese characters.
+Directly using the cangjie-large table would make word selection inevitable since the table is too large.
+
+# How
+This projects references the work of https://github.com/ChhoeTaigi/ChhoeTaigiDatabase as a submodule.
+The script, `generate.py`, reads from some of these databases, and selectively adds words from the cangjie-large table to the cangjie3 table.
+
+We have chose to not commit the patched cangjie3 table to prevent diff hell if ever upstream has patches.
+Run the script before you build the project normally.
+
+# Contribution
+Feel free to open a PR if this work interests you or if you have patches that could improve it :)
+
+--- 
+# Original README below
+
 Requirements:
 
     You need to install fcitx5-chinese-addons and libime first.
