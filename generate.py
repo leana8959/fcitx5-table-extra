@@ -84,18 +84,6 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_EmbreeTaiengSutian.csv")) as
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
 
-with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")) as csvfile:
-    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-    header = reader.__next__()
-    header = { v: k for (k, v) in enumerate(header) }
-    for row in reader:
-        for c in (
-            row[header['HoaBun']]
-            + row[header['LekuHoabun']]
-        ):
-            if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
-
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KauiokpooTaigiSutian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
     header = reader.__next__()
@@ -105,6 +93,18 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KauiokpooTaigiSutian.csv")) 
             row[header['HanLoTaibunKip']]
             + row[header['HoaBun']]
             + row[header['KaisoehHanLoPoj']]
+        ):
+            if unicodedata.category(c) == 'Lo':
+                WORDSET.add(c)
+
+with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")) as csvfile:
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    header = reader.__next__()
+    header = { v: k for (k, v) in enumerate(header) }
+    for row in reader:
+        for c in (
+            row[header['HoaBun']]
+            + row[header['LekuHoabun']]
         ):
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
