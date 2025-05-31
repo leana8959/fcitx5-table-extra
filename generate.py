@@ -111,16 +111,11 @@ with open(CANGJIE_3_PATH, mode="r+") as f:
         if word not in map(lambda u: u[1], TABLE_3)
     }
 
-    TABLE_3 = TABLE_3.union(TABLE_LARGE_DEDUP)
-
     # Regenerate lines
     new_lines = []
-    for (code, word) in TABLE_3:
+    for (code, word) in TABLE_LARGE_DEDUP:
         new_lines.append(f"{code} {word}")
-
     new_lines.sort()
 
-    f.seek(0)
-    f.truncate()
-    output_content = "\n".join(header + new_lines)
+    output_content = "\n".join(new_lines)
     f.write(output_content)
