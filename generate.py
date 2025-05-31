@@ -109,6 +109,18 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KamJitian.csv")) as csvfile:
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
 
+with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_iTaigiHoataiTuichiautian.csv")) as csvfile:
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    header = reader.__next__()
+    header = { v: k for (k, v) in enumerate(header) }
+    for row in reader:
+        for c in (
+            row[header['HanLoTaibunKip']]
+            + row[header['HanLoTaibunPoj']]
+        ):
+            if unicodedata.category(c) == 'Lo':
+                WORDSET.add(c)
+
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
     header = reader.__next__()
