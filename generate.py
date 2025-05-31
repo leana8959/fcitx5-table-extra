@@ -60,6 +60,19 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
 
+with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KauiokpooTaigiSutian.csv")) as csvfile:
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    header = reader.__next__()
+    header = { v: k for (k, v) in enumerate(header) }
+    for row in reader:
+        for c in (
+            row[header['HanLoTaibunKip']]
+            + row[header['HoaBun']]
+            + row[header['KaisoehHanLoPoj']]
+        ):
+            if unicodedata.category(c) == 'Lo':
+                WORDSET.add(c)
+
 print(f"INFO: loaded {len(WORDSET)} words")
 
 #
