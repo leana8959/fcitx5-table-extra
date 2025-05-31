@@ -22,6 +22,9 @@ import unicodedata
 #  - run uniq on it
 #  - TODO:
 
+# Gotchas:
+#  - split() is semantically different from split(" "), because the former eats ideographic space
+
 DICTIONARY_PATH = "./ChhoeTaigiDatabase/ChhoeTaigiDatabase"
 CANGJIE_LARGE_PATH = "./tables/cangjie-large.txt"
 CANGJIE_3_PATH = "./tables/cangjie3.txt"
@@ -38,9 +41,10 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaihoaSoanntengTuichiautian.
     header = reader.__next__()
     header = { v: k for (k, v) in enumerate(header) }
     for row in reader:
-        code = row[header['HanLoTaibunPoj']]
-        word = row[header['HanLoTaibunKip']]
-        for c in code + word:
+        for c in (
+            row[header['HanLoTaibunPoj']]
+            + row[header['HanLoTaibunKip']]
+        ):
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
 
@@ -52,7 +56,7 @@ with open(CANGJIE_LARGE_PATH) as f:
     lines = lines[30:] # HACK: drop the header of the table
 
     for line in lines:
-        (code, word, *_) = line.split() + [None]
+        (code, word) = line.split(" ")
         if word and word in WORDSET:
             TABLE_LARGE.add((code, word))
 
@@ -66,7 +70,7 @@ with open(CANGJIE_3_PATH, mode="r+") as f:
 
     # Get all pairs
     for line in lines:
-        (code, word, *_) = line.split() + [None]
+        (code, word) = line.split(" ")
         TABLE_3.add((code, word))
 
     # Dedup and get unique new ones
