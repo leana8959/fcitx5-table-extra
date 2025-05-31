@@ -111,15 +111,12 @@ with open(CANGJIE_3_PATH, mode="r+") as f:
         if word not in map(lambda u: u[1], TABLE_3)
     }
 
-    TABLE_3.union(TABLE_LARGE_DEDUP)
+    TABLE_3 = TABLE_3.union(TABLE_LARGE_DEDUP)
 
     # Regenerate lines
     new_lines = []
     for (code, word) in TABLE_3:
-        if not word:
-            new_lines.append(f"{code}")
-        else:
-            new_lines.append(f"{code} {word}")
+        new_lines.append(f"{code} {word}")
 
     new_lines.sort()
 
