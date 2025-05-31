@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import re
 import csv
 import unicodedata
 
@@ -29,7 +28,13 @@ DICTIONARY_PATH = "./ChhoeTaigiDatabase/ChhoeTaigiDatabase"
 CANGJIE_LARGE_PATH = "./tables/cangjie-large.txt"
 CANGJIE_3_PATH = "./tables/cangjie3.txt"
 
-WORDSET = set()
+WORDSET = {}
+def register_word(c):
+    if c in WORDSET:
+        WORDSET[c] += 1
+    else:
+        WORDSET[c] = 1
+
 TABLE_LARGE = set()
 TABLE_3 = set()
 
@@ -46,7 +51,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaihoaSoanntengTuichiautian.
             + row[header['HanLoTaibunKip']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaijitToaSutian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -60,7 +65,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaijitToaSutian.csv")) as cs
             + row[header['GoanchhehPoochhiongChuliau']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_MaryknollTaiengSutian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -71,7 +76,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_MaryknollTaiengSutian.csv"))
             row[header['HoaBun']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_EmbreeTaiengSutian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -82,7 +87,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_EmbreeTaiengSutian.csv")) as
             row[header['HoaBun']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KauiokpooTaigiSutian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -95,7 +100,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KauiokpooTaigiSutian.csv")) 
             + row[header['KaisoehHanLoPoj']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KamJitian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -107,7 +112,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_KamJitian.csv")) as csvfile:
             + row[header['KaisoehHanLoPoj']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_iTaigiHoataiTuichiautian.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -119,7 +124,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_iTaigiHoataiTuichiautian.csv
             + row[header['HanLoTaibunPoj']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='"')
@@ -131,7 +136,7 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")
             + row[header['LekuHoabun']]
         ):
             if unicodedata.category(c) == 'Lo':
-                WORDSET.add(c)
+                register_word(c)
 
 print(f"INFO: loaded {len(WORDSET)} words")
 
@@ -171,11 +176,17 @@ with open(CANGJIE_3_PATH, mode="r+") as f:
         if word not in map(lambda u: u[1], TABLE_3)
     }
 
+    # Fix order with histogram
+    TABLE_LARGE_DEDUP = list(TABLE_LARGE_DEDUP)
+    def by_code_then_freq(entry):
+        (code, word) = entry
+        return (code, WORDSET[word])
+    TABLE_LARGE_DEDUP.sort(key=by_code_then_freq)
+
     # Regenerate lines
     new_lines = []
     for (code, word) in TABLE_LARGE_DEDUP:
         new_lines.append(f"{code} {word}")
-    new_lines.sort()
     print(f"INFO: will add {len(new_lines)} entries")
 
     output_content = "\n".join(new_lines)
