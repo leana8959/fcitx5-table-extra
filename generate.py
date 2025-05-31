@@ -116,6 +116,7 @@ with open(CANGJIE_3_PATH, mode="r+") as f:
     for (code, word) in TABLE_LARGE_DEDUP:
         new_lines.append(f"{code} {word}")
     new_lines.sort()
+    print(f"INFO: will add {len(new_lines)} entries")
 
     output_content = "\n".join(new_lines)
     f.write(output_content)
