@@ -48,17 +48,35 @@ with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaihoaSoanntengTuichiautian.
             if unicodedata.category(c) == 'Lo':
                 WORDSET.add(c)
 
+with open(os.path.join(DICTIONARY_PATH, "ChhoeTaigi_TaioanPehoeKichhooGiku.csv")) as csvfile:
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    header = reader.__next__()
+    header = { v: k for (k, v) in enumerate(header) }
+    for row in reader:
+        for c in (
+            row[header['HoaBun']]
+            + row[header['LekuHoabun']]
+        ):
+            if unicodedata.category(c) == 'Lo':
+                WORDSET.add(c)
+
+print(f"INFO: loaded {len(WORDSET)} words")
+
 #
 # Phase 2
 # 
 with open(CANGJIE_LARGE_PATH) as f:
     lines = f.read().splitlines()
     lines = lines[30:] # HACK: drop the header of the table
+    counter = 0
 
     for line in lines:
         (code, word) = line.split(" ")
         if word and word in WORDSET:
+            counter += 1
             TABLE_LARGE.add((code, word))
+
+    print(f"INFO: found {counter} words that has a cangjie code")
 
 #
 # Phase 3
