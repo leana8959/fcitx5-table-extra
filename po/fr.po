@@ -3,26 +3,26 @@
 # This file is distributed under the same license as the fcitx5-table-extra package.
 #
 # Translators:
-# Takuro Onoue <kusanaginoturugi@gmail.com>, 2020
-# Xuetian Weng <wengxt@gmail.com>, 2025
+# Popolon_Github, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-table-extra\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2025-09-03 20:24+0000\n"
+"POT-Creation-Date: 2025-09-12 20:24+0000\n"
 "PO-Revision-Date: 2020-09-13 02:40+0000\n"
-"Last-Translator: Xuetian Weng <wengxt@gmail.com>, 2025\n"
-"Language-Team: Japanese (https://app.transifex.com/fcitx/teams/12005/ja/)\n"
-"Language: ja\n"
+"Last-Translator: Popolon_Github, 2025\n"
+"Language-Team: French (https://app.transifex.com/fcitx/teams/12005/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #: org.fcitx.Fcitx5.Addon.TableExtra.metainfo.xml.in:8
 msgid "Additional Table based Chinese input method"
-msgstr "追加テーブルによる中国語入力メソッド"
+msgstr "Méthode de saisie par table additionnel pour le chinois"
 
 #: tables/array30.conf.in:2
 msgid "Array30"
@@ -30,7 +30,7 @@ msgstr "Array30"
 
 #: tables/array30-large.conf.in:2
 msgid "Array30 Large"
-msgstr "Array30 Large"
+msgstr "Array30 large"
 
 #: tables/boshiamy.conf.in:2
 msgid "Boshiamy"
@@ -38,7 +38,7 @@ msgstr "Boshiamy"
 
 #: tables/cangjie-large.conf.in:2
 msgid "Cangjie Large"
-msgstr "Cangjie Large"
+msgstr "Cangjie large"
 
 #: tables/cangjie3.conf.in:2
 msgid "Cangjie3"
@@ -54,19 +54,19 @@ msgstr "CantonHK"
 
 #: tables/cantonese.conf.in:2
 msgid "Cantonese Pinyin"
-msgstr "教育学院拼音方案"
+msgstr "Pinyin cantonais"
 
 #: tables/easy-large.conf.in:2
 msgid "Easy Large"
-msgstr "らくらく入力法（大型辞書データ）"
+msgstr "Easy large"
 
 #: tables/jyutping-table.conf.in:2
 msgid "Jyutping Table"
-msgstr "香港語言学学会粤語拼音方案テーブル"
+msgstr "Table jyutping"
 
 #: tables/quick-classic.conf.in:2
 msgid "Quick Classic"
-msgstr "Quick Classic"
+msgstr "Quick classique"
 
 #: tables/quick3.conf.in:2
 msgid "Quick3"
@@ -86,11 +86,11 @@ msgstr "Stroke5"
 
 #: tables/t9.conf.in:2
 msgid "T9 (Stroke)"
-msgstr "T9 (Stroke)"
+msgstr "T9 (traits)"
 
 #: org.fcitx.Fcitx5.Addon.TableExtra.metainfo.xml.in:7
 msgid "Table Extra"
-msgstr "テーブルエクストラ"
+msgstr "Extra tables"
 
 #: tables/wu.conf.in:2
 msgid "Wu"
@@ -98,23 +98,23 @@ msgstr "Wu"
 
 #: tables/wubi-large.conf.in:2
 msgid "Wubi (Large)"
-msgstr "Wubi (Large)"
+msgstr "Wubi (large)"
 
 #: tables/wubi98.conf.in:2
 msgid "Wubi98"
-msgstr ""
+msgstr "Wubi98"
 
 #: tables/wubi98-pinyin.conf.in:2
 msgid "Wubi98 Pinyin"
-msgstr ""
+msgstr "Wubi98 Pinyin"
 
 #: tables/wubi98-single.conf.in:2
 msgid "Wubi98 Single"
-msgstr ""
+msgstr "Wubi98 simple"
 
 #: tables/wubi98-large.conf.in:2
 msgid "Wubi98 large"
-msgstr ""
+msgstr "Wubi98 large"
 
 #: tables/zhengma.conf.in:2 tables/zhengma.conf.in:10
 msgid "Zhengma"
@@ -122,8 +122,8 @@ msgstr "Zhengma"
 
 #: tables/zhengma-large.conf.in:2
 msgid "Zhengma (Large)"
-msgstr "Zhengma (Large)"
+msgstr "Zhengma (large)"
 
 #: tables/zhengma-pinyin.conf.in:2
 msgid "ZhengmaPinyin"
-msgstr "Zhengmaピンイン"
+msgstr "ZhengmaPinyin"
